@@ -22,6 +22,5 @@ Aşağıdaki modelleri indirip `models/` klasörüne yerleştiriniz:
 ├── opencv_face_detector_uint8.pb
 ```
 
-📂 **[Google Drive'dan modelleri indir]([https://drive.google.com/your-model-link](https://drive.google.com/drive/folders/1bO-AvdSkI3iqJ8mR9W_MkSoEj4WUQquC?usp=drive_link))**
-
+📂 **[Google Drive'dan modelleri indir](https://drive.google.com/your-model-link)**
 
