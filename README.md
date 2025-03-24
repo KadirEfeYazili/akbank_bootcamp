@@ -8,6 +8,11 @@ Bu proje, **Akbank Python ve Yapay Zekaya Giriş Bootcamp** kapsamında gelişti
 - DeepFace
 - TensorFlow/Keras
 - Tkinter (GUI için)
+  
+## 📚 Gerekli Kütüphane Komutları 
+pip install opencv-python numpy pillow
+pip install opencv-contrib-python
+pip install tk
 
 ## 📥 Kullanılan Modeller
 Aşağıdaki modelleri indirip `models/` klasörüne yerleştiriniz:
