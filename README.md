@@ -1,7 +1,7 @@
 # akbank_bootcamp
-Akbank python ve yapay zekaya giriş bootcamp projesi
+Akbank python ve yapay zekaya giriş bootcamp bitirme projesi
 # Yüz Tanıma ve Yaş Tahmini
-Bu proje, OpenCV ve Deep Learning kullanarak yüz tanıma ve yaş/cinsiyet tahmini yapmaktadır.
+Bu projede, OpenCV ve Deep Learning kullanarak yüz tanıma ve yaş/cinsiyet tahmini yapmaktadır.
 
 ## Kullanılan Modeller
 Modelleri aşağıdaki bağlantıdan indirip `models/` klasörüne koyunuz:
