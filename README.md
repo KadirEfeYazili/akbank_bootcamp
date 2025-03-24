@@ -10,9 +10,9 @@ Bu proje, **Akbank Python ve Yapay Zekaya Giriş Bootcamp** kapsamında gelişti
 - Tkinter (GUI için)
   
 ## 📚 Gerekli Kütüphane Komutları 
-*pip install opencv-python numpy pillow
-*pip install opencv-contrib-python
-*pip install tk
+- pip install opencv-python numpy pillow  
+- pip install opencv-contrib-python  
+- pip install tk  
 
 ## 📥 Kullanılan Modeller
 Aşağıdaki modelleri indirip `models/` klasörüne yerleştiriniz:
