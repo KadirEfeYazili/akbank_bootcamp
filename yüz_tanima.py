@@ -4,7 +4,6 @@ import tkinter as tk
 from tkinter import Label, Button
 from PIL import Image, ImageTk
 
-# Model dosyaları
 AGE_MODEL = "models/age_net.caffemodel"
 AGE_PROTO = "models/age_deploy.prototxt"
 GENDER_MODEL = "models/gender_net.caffemodel"
@@ -12,7 +11,6 @@ GENDER_PROTO = "models/gender_deploy.prototxt"
 FACE_PROTO = "models/opencv_face_detector.pbtxt"
 FACE_MODEL = "models/opencv_face_detector_uint8.pb"
 
-# Modeli yükleme
 try:
     age_net = cv2.dnn.readNetFromCaffe(AGE_PROTO, AGE_MODEL)
     gender_net = cv2.dnn.readNetFromCaffe(GENDER_PROTO, GENDER_MODEL)
@@ -25,44 +23,35 @@ except Exception as e:
 AGE_BUCKETS = ["(0-2)", "(4-6)", "(8-12)", "(15-20)", "(25-32)", "(38-43)", "(48-53)", "(60-100)"]
 GENDER_BUCKETS = ["Erkek", "Kadın"]
 
-# Kamera başlatma
 cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 
 if not cap.isOpened():
     print("Kamera açılamadı.")
     exit()
 
-# Tkinter Arayüzü
 root = tk.Tk()
 root.title("Yüz Tanıma Uygulaması")
 root.configure(bg="black")
 root.geometry("800x600")
 
-# Başlık
 title_label = tk.Label(root, text="YÜZ TANIMA UYGULAMASI", font=("Verdana", 18, "bold"), fg="white", bg="black")
 title_label.pack(pady=10)
 
-# Kamera görüntüsü için label
 video_label = Label(root)
 video_label.pack()
 
-# Yüzü ortalama uyarısı
 info_label = tk.Label(root, text="Lütfen yüzünüzü ortalayınız", font=("Verdana", 12, "bold"), fg="red", bg="black")
 info_label.pack(pady=10)
 
-# Tahmin sonucu etiketi
 result_label = Label(root, text="Kamera Açılıyor...", font=("Verdana", 14), fg="white", bg="black")
 result_label.pack(pady=10)
 
-# Fotoğraf çekme butonu
 capture_button = Button(root, text="Fotoğraf Çek", font=("Arial", 14), bg="gray", fg="white", command=lambda: capture_image())
 capture_button.pack(pady=10)
 
-# Değişkenler
 previous_gender = None
 
 def update_frame():
-    """Kamera görüntüsünü günceller ve yüz tespiti yapar"""
     ret, frame = cap.read()
     if ret:
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -75,10 +64,10 @@ def update_frame():
 
         for i in range(detections.shape[2]):
             confidence = detections[0, 0, i, 2]
-            if confidence > 0.5:  # Eşik değerini 0.5 yaptık
+            if confidence > 0.5:
                 box = detections[0, 0, i, 3:7] * np.array([frame.shape[1], frame.shape[0], frame.shape[1], frame.shape[0]])
                 (x, y, x2, y2) = box.astype("int")
-                cv2.rectangle(frame, (x, y), (x2, y2), (0, 255, 0), 2)  # Yüzü çerçeveleme
+                cv2.rectangle(frame, (x, y), (x2, y2), (0, 255, 0), 2)
 
         img = Image.fromarray(frame)
         imgtk = ImageTk.PhotoImage(image=img)
@@ -89,7 +78,6 @@ def update_frame():
 
 
 def capture_image():
-    """Fotoğraf çeker, yüz tespiti yapar ve tahmin sonucunu gösterir."""
     ret, frame = cap.read()
     last_predictions = []  # Tahminleri saklamak için liste
     if not ret:
@@ -116,9 +104,9 @@ def capture_image():
 
             global previous_gender
             if previous_gender is None:
-                previous_gender = gender  # İlk tahmini sakla
+                previous_gender = gender
             else:
-                gender = previous_gender  # Önceki tahmini kullan
+                gender = previous_gender
 
             prediction_text = f"{gender}, {age}"
 
@@ -126,12 +114,7 @@ def capture_image():
     capture_button.config(text="Tekrar Çek", bg="red")
 
 
-# Kamerayı güncelleme fonksiyonunu başlat
 update_frame()
-
-# Tkinter döngüsünü başlat
 root.mainloop()
-
-# Kamera serbest bırak
 cap.release()
 cv2.destroyAllWindows()
