@@ -32,7 +32,7 @@ if not cap.isOpened():
 root = tk.Tk()
 root.title("Yüz Tanıma Uygulaması")
 root.configure(bg="black")
-root.geometry("800x600")
+root.attributes("-fullscreen", True)
 
 title_label = tk.Label(root, text="YÜZ TANIMA UYGULAMASI", font=("Verdana", 18, "bold"), fg="white", bg="black")
 title_label.pack(pady=10)
@@ -48,6 +48,9 @@ result_label.pack(pady=10)
 
 capture_button = Button(root, text="Fotoğraf Çek", font=("Arial", 14), bg="gray", fg="white", command=lambda: capture_image())
 capture_button.pack(pady=10)
+
+exit_button = Button(root, text="Çıkış Yap", font=("Arial", 14), bg="red", fg="white", command=root.quit)
+exit_button.pack(pady=10)
 
 previous_gender = None
 
@@ -79,7 +82,7 @@ def update_frame():
 
 def capture_image():
     ret, frame = cap.read()
-    last_predictions = []  # Tahminleri saklamak için liste
+    last_predictions = []
     if not ret:
         return
 
@@ -90,7 +93,7 @@ def capture_image():
 
     for i in range(detections.shape[2]):
         confidence = detections[0, 0, i, 2]
-        if confidence > 0.5:  # Yüzü bulma eşik değeri
+        if confidence > 0.5:
             x, y, x2, y2 = (detections[0, 0, i, 3:7] * np.array([frame.shape[1], frame.shape[0], frame.shape[1], frame.shape[0]])).astype("int")
             face = frame[y:y2, x:x2]
 
