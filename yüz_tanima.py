@@ -40,7 +40,7 @@ title_label.pack(pady=10)
 video_label = Label(root)
 video_label.pack()
 
-info_label = tk.Label(root, text="Lütfen yüzünüzü ortalayınız", font=("Verdana", 12, "bold"), fg="red", bg="black")
+info_label = tk.Label(root, text="LÜTFEN YAKLAŞIN", font=("Verdana", 15, "bold"), fg="red", bg="black")
 info_label.pack(pady=10)
 
 result_label = Label(root, text="Kamera Açılıyor...", font=("Verdana", 14), fg="white", bg="black")
